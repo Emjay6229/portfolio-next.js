@@ -553,7 +553,7 @@ export default function Home() {
                 <TabsTrigger value="frameworks" className="text-white">
                   Frameworks
                 </TabsTrigger>
-                <TabsTrigger value="databases" className="text-white">
+                <TabsTrigger value="databases & ORMs" className="text-white">
                   Databases
                 </TabsTrigger>
                 <TabsTrigger value="tools" className="text-white">
@@ -562,35 +562,31 @@ export default function Home() {
               </TabsList>
               <TabsContent value="languages" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { name: "Java", level: "Intermediate" },
-                    { name: "JavaScript", level: "Advanced" },
-                    { name: "TypeScript", level: "Advanced" },
-                    { name: "SQL", level: "Intermediate" },
-                  ].map((skill, index) => (
+                  {[ { name: "Java" }, { name: "JavaScript" }, { name: "TypeScript"} ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
                 </div>
               </TabsContent>
               <TabsContent value="frameworks" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { name: "Node.js", level: "Advanced" },
-                    { name: "Express.js", level: "Advanced" },
-                    { name: "NestJS", level: "Intermediate" },
-                    { name: "Spring Boot", level: "Intermediate" },
-                    { name: "Dropwizard", level: "Intermediate" },
-                  ].map((skill, index) => (
+                  {[{ name: "NodeJS" },
+                    { name: "Express" }, 
+                    { name: "NestJS" }, 
+                    { name: "Spring Boot" }, 
+                    { name: "Dropwizard" }, 
+                    {name: "AdonisJs"}].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
                 </div>
               </TabsContent>
-              <TabsContent value="databases" className="mt-6">
+              <TabsContent value="databases & ORMs" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { name: "MongoDB", level: "Advanced" },
-                    { name: "PostgreSQL", level: "Advanced" },
-                    { name: "Redis", level: "Intermediate" },
+                  {[{ name: "MongoDB" }, 
+                    { name: "PostgreSQL" }, 
+                    { name: "Redis" },
+                    { name: "Prisma" },
+                    { name: "Mongoose" },
+                    { name: "TypeORM" }
                   ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
@@ -599,11 +595,11 @@ export default function Home() {
               <TabsContent value="tools" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { name: "Git", level: "Advanced" },
-                    { name: "IntelliJ", level: "Advanced" },
-                    { name: "VS Code", level: "Advanced" },
-                    { name: "Docker", level: "Intermediate" },
-                    { name: "gRPC", level: "Intermediate" },
+                    { name: "Git" },
+                    { name: "IntelliJ" },
+                    { name: "VSCode" },
+                    { name: "Docker" },
+                    { name: "gRPC" }
                   ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
@@ -838,11 +834,10 @@ function AnimatedSection({
 
 type AnimatedSkillCardProps = {
   name: string;
-  level: string;
   index: number;
 };
 
-function AnimatedSkillCard({ name, level, index }: AnimatedSkillCardProps) {
+function AnimatedSkillCard({ name, index }: AnimatedSkillCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -850,7 +845,7 @@ function AnimatedSkillCard({ name, level, index }: AnimatedSkillCardProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <SkillCard skill={name} level={level} />
+      <SkillCard skill={name} />
     </motion.div>
   );
 }
