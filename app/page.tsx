@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ExternalLink, Mail, FileText, ArrowRight } from "lucide-react"
+import SkillCard from "@/components/skill-card";
 
 export default function Home() {
   const { scrollYProgress } = useScroll()
@@ -185,7 +186,8 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Building robust, fault tolerant backend systems and scalable cloud infrastructure.
+                I design and build robust and fault tolerant backend solutions that power modern applications.
+                Strong interest in distributed software systems, scalable infrastructure and clean architecture.
               </motion.p>
 
               <motion.div
@@ -250,7 +252,13 @@ export default function Home() {
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
               >
-                <Image src="/placeholder.svg?height=400&width=400" alt="Profile" fill className="object-cover" />
+                <Image
+                  src="/asset/josh_bw.jpeg"
+                  width={400}
+                  height={400}
+                  alt="Profile"
+                  fill
+                  className="object-cover" />
               </motion.div>
             </motion.div>
           </div>
@@ -266,7 +274,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Project Title
+              Project Idea
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <motion.div
@@ -278,7 +286,9 @@ export default function Home() {
                 whileHover={{ scale: 1.02 }}
               >
                 <Image
-                  src="/placeholder.svg?height=600&width=800"
+                  src="/asset/find-doc.png"
+                  width={800}
+                  height={200}
                   alt="Find a Doctor Startup Concept"
                   fill
                   className="object-cover"
@@ -294,7 +304,7 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-white">Find a Doctor</h3>
                 <p className="text-blue-300">
                   A revolutionary healthcare platform concept that would connect patients with specialized doctors in
-                  real-time. Using advanced matching algorithms, it aims to reduce appointment wait times by 60% while
+                  real-time. Using advanced matching algorithms, geolocation and artificial intelligence, it aims to reduce appointment wait times by 60% while
                   ensuring optimal doctor-patient compatibility based on medical history and expertise.
                 </p>
                 <motion.div
@@ -359,8 +369,8 @@ export default function Home() {
           <div className="max-w-3xl space-y-4">
             {[
               "I'm a passionate Software Engineer with a strong interest in distributed software systems and digital transformation.",
-              "I bring 2+ years of hands-on experience in backend development for web and mobile applications using tools like Java, Springboot, Dropwizard, gRPC and Node.js. Currently exploring Cloud DevOps Engineering at AltSchool Africa.", 
-              "A medical biochemist turned software engineer, I get excited about the intersections between health and technology; learning and exploring how engineering, technology and data can strengthen healthcare systems, research and delivery.", 
+              "I bring 2+ years of hands-on experience in backend development for web and mobile applications using tools like Java, Springboot, Dropwizard, gRPC and Node.js. Currently exploring Cloud DevOps Engineering at AltSchool Africa.",
+              "A Medical Biochemist turned software engineer, I get excited about the intersections between health and technology; learning and exploring how engineering, technology and data can strengthen healthcare systems, research and delivery.",
               "When I'm not programming, I love to read around several subjects of interest (theology, tech, growth), share my knowledge amongst developer commmunity or play on the piano.",
             ].map((text, index) => (
               <motion.p
@@ -396,22 +406,48 @@ export default function Home() {
                   description:
                     "A comprehensive system for creating, managing, and analyzing reports with advanced filtering capabilities.",
                   tech: ["TypeScript", "Node.js", "Express", "MongoDB"],
+                  pic: "/asset/report.png",
+                  code: "https://github.com/Emjay6229/e-Report",
+                  demo: ""
                 },
                 {
                   title: "Task Tracker",
                   description: "A productivity application for managing tasks, deadlines, and team collaboration.",
-                  tech: ["JavaScript", "Node.js", "Express", "MongoDB"],
+                  tech: ["JavaScript", "Node.js", "Express", "MongoDB", "Cloudinary"],
+                  pic: "/asset/task.png",
+                  code: "https://github.com/Emjay6229/Task-Tracker",
+                  demo: "https://task-management-nu-nine.vercel.app/"
                 },
                 {
                   title: "Loan Management System",
                   description:
                     "A secure platform for processing loan applications, tracking repayments, and managing borrower information.",
                   tech: ["TypeScript", "Node.js", "Express", "Redis", "Postgres"],
+                  pic: "/asset/loan.png",
+                  code: "",
+                  demo: "https://ezzymeans-fe.onrender.com/"
                 },
+                // {
+                //   title: "Aidra AI",
+                //   description: "Your AI business co-pilot designed to streamline your business tasks and enhance customer communication with ease.",
+                //   tech: ["TypeScript", "Node.js", "Express", "MongoDB", "Twilio"],
+                //   pic: "/asset/loan.png"
+                // },
                 {
                   title: "URL Shortener",
                   description: "A high-performance URL shortening service with analytics and custom alias support.",
                   tech: ["Java", "Dropwizard", "Hibernate", "Postgres"],
+                  pic: "/asset/shortner.png",
+                  code: "https://github.com/Emjay6229/dropwizard-app",
+                  demo: ""
+                },
+                 {
+                  title: "Compare env",
+                  description: "A utility CLI tool that compares .env or .yaml/yml config files and prints the difference",
+                  tech: ["TypeScript", "Chalk", "Commander", "cli-table3"],
+                  pic: "/asset/compare.png",
+                  code: "https://github.com/Emjay6229/compare-env",
+                  demo: ""
                 },
               ].map((project, index) => (
                 <motion.div
@@ -425,7 +461,9 @@ export default function Home() {
                   <Card className="overflow-hidden h-full bg-slate-800/50 border-slate-700 hover:border-blue-500/50 transition-all duration-300">
                     <motion.div className="relative h-48" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
                       <Image
-                        src="/placeholder.svg?height=300&width=500"
+                        src={project.pic}
+                        width={500}
+                        height={300}
                         alt={project.title}
                         fill
                         className="object-cover"
@@ -454,20 +492,32 @@ export default function Home() {
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                        <a
+                          href={project.code}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <Github className="mr-2 h-4 w-4" />
-                          Code
-                        </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                          >
+                            <Github className="mr-2 h-4 w-4" />
+                            Code
+                          </Button>
+                        </a>
                       </motion.div>
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Demo
-                        </Button>
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Demo
+                          </Button>
+                        </a>
                       </motion.div>
                     </CardFooter>
                   </Card>
@@ -513,7 +563,7 @@ export default function Home() {
               <TabsContent value="languages" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { name: "Java", level: "Advanced" },
+                    { name: "Java", level: "Intermediate" },
                     { name: "JavaScript", level: "Advanced" },
                     { name: "TypeScript", level: "Advanced" },
                     { name: "SQL", level: "Intermediate" },
@@ -527,7 +577,7 @@ export default function Home() {
                   {[
                     { name: "Node.js", level: "Advanced" },
                     { name: "Express.js", level: "Advanced" },
-                    { name: "NestJS", level: "Advanced" },
+                    { name: "NestJS", level: "Intermediate" },
                     { name: "Spring Boot", level: "Intermediate" },
                     { name: "Dropwizard", level: "Intermediate" },
                   ].map((skill, index) => (
@@ -553,6 +603,7 @@ export default function Home() {
                     { name: "IntelliJ", level: "Advanced" },
                     { name: "VS Code", level: "Advanced" },
                     { name: "Docker", level: "Intermediate" },
+                    { name: "gRPC", level: "Intermediate" },
                   ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
@@ -767,7 +818,7 @@ function AnimatedSection({
   children,
   className = "",
   ...props
-}: { children: React.ReactNode; className?: string; [key: string]: any }) {
+}: { children: React.ReactNode; className?: string;[key: string]: any }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -785,28 +836,23 @@ function AnimatedSection({
   )
 }
 
-function AnimatedSkillCard({ name, level, index }: { name: string; level: string; index: number }) {
+type AnimatedSkillCardProps = {
+  name: string;
+  level: string;
+  index: number;
+};
+
+function AnimatedSkillCard({ name, level, index }: AnimatedSkillCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.05, rotate: 2 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <Card className="flex flex-col items-center p-4 hover:border-primary transition-colors bg-slate-800/50 border-slate-700 hover:border-blue-500/50 transition-all duration-300">
-        <motion.div
-          className="text-4xl mb-2 text-white"
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, repeatDelay: 3 }}
-        >
-          {getIconForSkill(name)}
-        </motion.div>
-        <h3 className="font-medium text-center text-white">{name}</h3>
-        <p className="text-sm text-blue-300 text-center">{level}</p>
-      </Card>
+      <SkillCard skill={name} level={level} />
     </motion.div>
-  )
+  );
 }
 
 const socialLinks = [
@@ -814,26 +860,3 @@ const socialLinks = [
   { icon: LinkedIn, text: "https://www.linkedin.com/in/joshuaonwuemene" },
   { icon: Github, text: "https://github.com/emjay6229" },
 ];
-
-function getIconForSkill(skill: string) {
-  const iconMap: Record<string, string> = {
-    Java: "☕",
-    JavaScript: "JS",
-    TypeScript: "TS",
-    SQL: "🔍",
-    "Node.js": "📦",
-    "Express.js": "🚂",
-    NestJS: "🐈",
-    "Spring Boot": "🍃",
-    Dropwizard: "🔧",
-    MongoDB: "🍃",
-    PostgreSQL: "🐘",
-    Redis: "🔴",
-    Git: "🔄",
-    IntelliJ: "🧠",
-    "VS Code": "📝",
-    Docker: "🐳",
-  }
-
-  return iconMap[skill] || "🔧"
-}
