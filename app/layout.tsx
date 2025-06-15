@@ -6,7 +6,7 @@ import "devicon/devicon.min.css";
 export const metadata: Metadata = {
   title: "Joshua Onwuemene | Backend and Cloud Engineer",
   description:
-    "Professional portfolio of Joshua Onwuemene, a Backend and Cloud Engineer specializing in Java, TypeScript, and cloud technologies."
+    "Professional portfolio of Joshua Onwuemene, a Backend and Cloud Engineer"
 }
 
 export default function RootLayout({

@@ -3,18 +3,50 @@
 import Image from "next/image"
 import type React from "react"
 import { Github, LinkedIn } from "@/components/ui/icons"
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ExternalLink, Mail, FileText, ArrowRight } from "lucide-react"
-import SkillCard from "@/components/skill-card";
+import SkillCard from "@/components/skill-card"
+import { useState, useEffect, useMemo } from "react"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
+import { useRef } from "react"
 
 export default function Home() {
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+
+  const phrases = useMemo(() => ["robust and scalable", "fault-tolerant", "high-performance"], [])
+
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [displayedPhrase, setDisplayedPhrase] = useState("")
+  const [charIndex, setCharIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex]
+    let timeout: NodeJS.Timeout
+
+    if (!isDeleting && charIndex < currentPhrase.length) {
+      timeout = setTimeout(() => {
+        setDisplayedPhrase((prev) => prev + currentPhrase[charIndex])
+        setCharIndex((prev) => prev + 1)
+      }, 100)
+    } else if (isDeleting && charIndex > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedPhrase((prev) => prev.slice(0, -1))
+        setCharIndex((prev) => prev - 1)
+      }, 50)
+    } else if (!isDeleting && charIndex === currentPhrase.length) {
+      timeout = setTimeout(() => setIsDeleting(true), 1500)
+    } else if (isDeleting && charIndex === 0) {
+      setIsDeleting(false)
+      setPhraseIndex((prev) => (prev + 1) % phrases.length)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [charIndex, isDeleting, phraseIndex, phrases])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -172,22 +204,43 @@ export default function Home() {
               </motion.h1>
 
               <motion.h2
-                className="text-2xl md:text-3xl font-medium text-blue-300"
+                className="text-xl md:text-2xl font-mono text-blue-300"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                Backend and Cloud Engineer
+                Backend and Cloud Engineer passionate about building{" "}
+                <motion.span
+                  className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent font-semibold"
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: 1 }}
+                >
+                  {displayedPhrase}
+                  <motion.span
+                    className="inline-block w-0.5 h-6 bg-yellow-400 ml-1"
+                    animate={{ opacity: [1, 0] }}
+                    transition={{
+                      duration: 0.8,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatType: "reverse",
+                    }}
+                  />
+                </motion.span>
+                <br className="hidden sm:block" />
+                systems for{" "}
+                <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent font-semibold">
+                  web and mobile applications
+                </span>
               </motion.h2>
 
               <motion.p
-                className="text-xl text-gray-300"
+                className="text-lg text-gray-300"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                I design and build robust and fault tolerant backend solutions that power modern applications.
-                Strong interest in distributed software systems, scalable infrastructure and clean architecture.
+                I design and build robust and fault tolerant backend solutions that power modern applications. Strong
+                interest in distributed software systems, scalable infrastructure and clean architecture.
               </motion.p>
 
               <motion.div
@@ -252,13 +305,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
               >
-                <Image
-                  src="/asset/josh_bw.jpeg"
-                  width={400}
-                  height={400}
-                  alt="Profile"
-                  fill
-                  className="object-cover" />
+                <Image src="/asset/josh_bw.jpeg" width={400} height={400} alt="Profile" fill className="object-cover" />
               </motion.div>
             </motion.div>
           </div>
@@ -304,8 +351,9 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-white">Find a Doctor</h3>
                 <p className="text-blue-300">
                   A revolutionary healthcare platform concept that would connect patients with specialized doctors in
-                  real-time. Using advanced matching algorithms, geolocation and artificial intelligence, it aims to reduce appointment wait times by 60% while
-                  ensuring optimal doctor-patient compatibility based on medical history and expertise.
+                  real-time. Using advanced matching algorithms, geolocation and artificial intelligence, it aims to
+                  reduce appointment wait times by 60% while ensuring optimal doctor-patient compatibility based on
+                  medical history and expertise.
                 </p>
                 <motion.div
                   className="flex flex-wrap gap-2"
@@ -402,13 +450,13 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Report Management System",
+                  title: "E-Report",
                   description:
-                    "A comprehensive system for creating, managing, and analyzing reports with advanced filtering capabilities.",
+                    "A comprehensive employee report submission system for creating, managing, and analyzing reports.",
                   tech: ["TypeScript", "Node.js", "Express", "MongoDB"],
                   pic: "/asset/report.png",
                   code: "https://github.com/Emjay6229/e-Report",
-                  demo: ""
+                  demo: "",
                 },
                 {
                   title: "Task Tracker",
@@ -416,16 +464,16 @@ export default function Home() {
                   tech: ["JavaScript", "Node.js", "Express", "MongoDB", "Cloudinary"],
                   pic: "/asset/task.png",
                   code: "https://github.com/Emjay6229/Task-Tracker",
-                  demo: "https://task-management-nu-nine.vercel.app/"
+                  demo: "https://task-management-nu-nine.vercel.app/",
                 },
                 {
-                  title: "Loan Management System",
+                  title: "Ezzymeans",
                   description:
                     "A secure platform for processing loan applications, tracking repayments, and managing borrower information.",
                   tech: ["TypeScript", "Node.js", "Express", "Redis", "Postgres"],
                   pic: "/asset/loan.png",
                   code: "",
-                  demo: "https://ezzymeans-fe.onrender.com/"
+                  demo: "https://ezzymeans-fe.onrender.com/",
                 },
                 // {
                 //   title: "Aidra AI",
@@ -439,15 +487,16 @@ export default function Home() {
                   tech: ["Java", "Dropwizard", "Hibernate", "Postgres"],
                   pic: "/asset/shortner.png",
                   code: "https://github.com/Emjay6229/dropwizard-app",
-                  demo: ""
+                  demo: "",
                 },
-                 {
+                {
                   title: "Compare env",
-                  description: "A utility CLI tool that compares .env or .yaml/yml config files and prints the difference",
+                  description:
+                    "A utility CLI tool that compares .env or .yaml/yml config files and prints the difference",
                   tech: ["TypeScript", "Chalk", "Commander", "cli-table3"],
                   pic: "/asset/compare.png",
                   code: "https://github.com/Emjay6229/compare-env",
-                  demo: ""
+                  demo: "",
                 },
               ].map((project, index) => (
                 <motion.div
@@ -461,7 +510,7 @@ export default function Home() {
                   <Card className="overflow-hidden h-full bg-slate-800/50 border-slate-700 hover:border-blue-500/50 transition-all duration-300">
                     <motion.div className="relative h-48" whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
                       <Image
-                        src={project.pic}
+                        src={project.pic || "/placeholder.svg"}
                         width={500}
                         height={300}
                         alt={project.title}
@@ -492,11 +541,7 @@ export default function Home() {
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <a
-                          href={project.code}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <a href={project.code} target="_blank" rel="noopener noreferrer">
                           <Button
                             variant="outline"
                             size="sm"
@@ -508,11 +553,7 @@ export default function Home() {
                         </a>
                       </motion.div>
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
                           <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
                             <ExternalLink className="mr-2 h-4 w-4" />
                             Demo
@@ -562,31 +603,34 @@ export default function Home() {
               </TabsList>
               <TabsContent value="languages" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[ { name: "Java" }, { name: "JavaScript" }, { name: "TypeScript"} ].map((skill, index) => (
+                  {[{ name: "Java" }, { name: "JavaScript" }, { name: "TypeScript" }].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
                 </div>
               </TabsContent>
               <TabsContent value="frameworks" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[{ name: "NodeJS" },
-                    { name: "Express" }, 
-                    { name: "NestJS" }, 
-                    { name: "Spring Boot" }, 
-                    { name: "Dropwizard" }, 
-                    {name: "AdonisJs"}].map((skill, index) => (
+                  {[
+                    { name: "NodeJS" },
+                    { name: "Express" },
+                    { name: "NestJS" },
+                    { name: "Spring Boot" },
+                    { name: "Dropwizard" },
+                    { name: "AdonisJs" },
+                  ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
                 </div>
               </TabsContent>
               <TabsContent value="databases & ORMs" className="mt-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[{ name: "MongoDB" }, 
-                    { name: "PostgreSQL" }, 
+                  {[
+                    { name: "MongoDB" },
+                    { name: "PostgreSQL" },
                     { name: "Redis" },
                     { name: "Prisma" },
                     { name: "Mongoose" },
-                    { name: "TypeORM" }
+                    { name: "TypeORM" },
                   ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
@@ -599,7 +643,7 @@ export default function Home() {
                     { name: "IntelliJ" },
                     { name: "VSCode" },
                     { name: "Docker" },
-                    { name: "gRPC" }
+                    { name: "gRPC" },
                   ].map((skill, index) => (
                     <AnimatedSkillCard key={skill.name} {...skill} index={index} />
                   ))}
@@ -814,7 +858,7 @@ function AnimatedSection({
   children,
   className = "",
   ...props
-}: { children: React.ReactNode; className?: string;[key: string]: any }) {
+}: { children: React.ReactNode; className?: string; [key: string]: any }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -833,9 +877,9 @@ function AnimatedSection({
 }
 
 type AnimatedSkillCardProps = {
-  name: string;
-  index: number;
-};
+  name: string
+  index: number
+}
 
 function AnimatedSkillCard({ name, index }: AnimatedSkillCardProps) {
   return (
@@ -847,11 +891,11 @@ function AnimatedSkillCard({ name, index }: AnimatedSkillCardProps) {
     >
       <SkillCard skill={name} />
     </motion.div>
-  );
+  )
 }
 
 const socialLinks = [
   { icon: Mail, text: "joshua.onwuemene5@gmail.com" },
   { icon: LinkedIn, text: "https://www.linkedin.com/in/joshuaonwuemene" },
   { icon: Github, text: "https://github.com/emjay6229" },
-];
+]
