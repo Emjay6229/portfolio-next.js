@@ -59,18 +59,18 @@ export default function Home() {
       >
         <div className="container flex h-16 items-center justify-between">
           <motion.div
-            className="font-bold text-xl text-white"
+            className="font-mono text-l text-white"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            Joshua Onwuemene
+            emjay.dev
           </motion.div>
           <nav className="hidden md:flex items-center gap-6">
             {["about", "projects", "skills", "education", "contact"].map((section, index) => (
               <motion.a
                 key={section}
                 href={`#${section}`}
-                className="text-sm font-medium hover:underline underline-offset-4 text-white"
+                className="text-sm font-mono hover:underline underline-offset-4 text-white"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -87,7 +87,7 @@ export default function Home() {
           {/* Mobile Navigation Menu */}
           <div className="md:hidden">
             <motion.button
-              className="text-sm font-medium p-2 text-white"
+              className="text-sm font-mono p-2 text-white"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
@@ -126,7 +126,7 @@ export default function Home() {
                   <motion.a
                     key={section}
                     href={`#${section}`}
-                    className="text-sm font-medium hover:underline underline-offset-4 py-2 text-white"
+                    className="text-sm font-mono hover:underline underline-offset-4 py-2 text-white"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -150,7 +150,7 @@ export default function Home() {
             <Button
               variant="outline"
               size="sm"
-              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+              className="font-mono border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
             >
               <FileText className="mr-2 h-4 w-4" />
               Resume
@@ -239,7 +239,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                I design and build robust and fault tolerant backend solutions that power modern applications. Strong
+                I design and build robust backend solutions that power modern applications. Strong
                 interest in distributed software systems, scalable infrastructure and clean architecture.
               </motion.p>
 
@@ -251,7 +251,7 @@ export default function Home() {
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
-                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-mono"
                     onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                   >
                     Contact Me
@@ -261,7 +261,7 @@ export default function Home() {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
                     variant="outline"
-                    className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                    className="font-mono border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
                     onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
                   >
                     View Projects
@@ -348,9 +348,9 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl font-bold text-white">Find a Doctor</h3>
+                <h3 className="text-2xl bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent font-bold">Find a Doctor</h3>
                 <p className="text-blue-300">
-                  A revolutionary healthcare platform concept that would connect patients with specialized doctors in
+                  Find a Doctor is a revolutionary healthcare platform concept that would connect patients with specialized doctors in
                   real-time. Using advanced matching algorithms, geolocation and artificial intelligence, it aims to
                   reduce appointment wait times by 60% while ensuring optimal doctor-patient compatibility based on
                   medical history and expertise.
@@ -385,14 +385,14 @@ export default function Home() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                      className="font-mono border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
                     >
                       <Github className="mr-2 h-4 w-4" />
                       Concept Repo
                     </Button>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Button size="sm" className="font-mono bg-blue-600 hover:bg-blue-700 text-white">
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Pitch Deck
                     </Button>
@@ -450,7 +450,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
-                  title: "E-Report",
+                  title: "e-Report",
                   description:
                     "A comprehensive employee report submission system for creating, managing, and analyzing reports.",
                   tech: ["TypeScript", "Node.js", "Express", "MongoDB"],
@@ -826,7 +826,7 @@ export default function Home() {
         viewport={{ once: true }}
       >
         <div className="container flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-blue-300 mb-4 md:mb-0">© 2025 Joshua Onwuemene. All rights reserved.</div>
+          <div className="font-mono text-sm text-blue-300 mb-4 md:mb-0">© 2025 Joshua Onwuemene. All rights reserved.</div>
           <div className="flex gap-6">
             {[
               { href: "https://github.com/Emjay6229", icon: Github },
